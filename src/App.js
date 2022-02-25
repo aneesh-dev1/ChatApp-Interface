@@ -1,7 +1,13 @@
+import CommentItem from "./components/CommentItem";
+
 function App() {
   return (
     <div>
-      <h1>Hi</h1>
+      <main>
+        <CommentItem />
+        <CommentItem />
+        <CommentItem />
+      </main>
     </div>
   );
 }

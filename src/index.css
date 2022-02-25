@@ -29,3 +29,79 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+main {
+  margin: 5rem auto;
+  width: 60%;
+}
+
+.comment {
+  height: 10rem;
+  background-color: var(--neutral-white);
+  margin-top: 1rem;
+  padding: 1.2rem;
+  box-sizing: border-box;
+  border-radius: 0.7rem;
+  position: relative;
+  display: flex;
+}
+
+.vote {
+  width: 1.2rem;
+  height: 6rem;
+  display: flex;
+  margin-right: 1rem;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: var(--neutral-gray);
+  padding: 0.4rem 0.7rem;
+  border-radius: 0.4rem;
+}
+
+.vote p {
+  color: var(--primary-blue);
+  font-weight: 500;
+}
+
+.commentContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1.2rem;
+}
+
+.avatar,
+.username,
+.time {
+  margin: auto 1rem auto 0rem;
+}
+
+.avatar {
+  width: 2.3rem;
+  height: 2.3rem;
+}
+
+.time,
+.commentText {
+  color: var(--neutral-grayish-blue);
+}
+
+.commentText {
+  margin: 0px;
+}
+
+.reply {
+  position: absolute;
+  right: 1.5rem;
+  top: 1.3rem;
+}
+
+.reply p {
+  display: inline;
+  color: var(--primary-blue);
+  font-weight: 500;
+}
