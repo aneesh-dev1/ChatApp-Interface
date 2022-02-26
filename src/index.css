@@ -147,3 +147,15 @@ main {
   top: 0rem;
   right: 0.5rem;
 }
+
+/* CommentReply Component  */
+
+.replyComment {
+  width: 90%;
+  margin-left: 10%;
+}
+
+.commentText .username {
+  color: var(--primary-blue);
+  margin-right: 0.1rem;
+}
