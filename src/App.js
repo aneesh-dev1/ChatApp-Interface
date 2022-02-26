@@ -1,4 +1,5 @@
 import CommentItem from "./components/CommentItem";
+import CreateComment from "./components/CreateComment";
 
 function App() {
   return (
@@ -7,6 +8,7 @@ function App() {
         <CommentItem />
         <CommentItem />
         <CommentItem />
+        <CreateComment />
       </main>
     </div>
   );
