@@ -153,6 +153,7 @@ main {
   border-radius: 0.3rem;
   padding: 1rem 1.2rem;
   margin-right: 1rem;
+  resize: none;
 }
 
 .submit {
@@ -171,6 +172,21 @@ main {
 .replyComment {
   width: 90%;
   margin-left: 10%;
+}
+
+.container {
+  position: relative;
+}
+
+/* Vertical Line */
+.replyComment::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: -2.3rem;
+  border-left: 0.2rem solid rgb(213, 215, 218);
 }
 
 .commentText .username {
