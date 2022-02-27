@@ -156,6 +156,11 @@ main {
   resize: none;
 }
 
+.inputComment:focus-visible {
+  outline: none;
+  border: 1.5px solid var(--primary-blue);
+}
+
 .submit {
   color: var(--neutral-white);
   background-color: var(--primary-blue);
