@@ -5,31 +5,37 @@ import deleteIcon from "../assets/images/icon-delete.svg";
 import editIcon from "../assets/images/icon-edit.svg";
 import avatarIcon from "../assets/images/avatars/image-amyrobson.png";
 import CommentReply from "./CommentReply";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import CommentContext from "../context/CommentContext";
 
-const CommentItem = () => {
+const CommentItem = ({ comment }) => {
+  const { currentUser } = useContext(CommentContext);
+
+  let { score, createdAt, user, content, replies } = comment;
+
   const [isCurrentUser, setIsCurrentUser] = useState(false);
   return (
     <>
       <div className="comment">
         <div className="vote">
           <img src={plusIcon} alt="+" />
-          <p>12</p>
+          <p>{score}</p>
           <img src={minusIcon} alt="-" />
         </div>
         <div className="commentContent">
           <div className="title">
-            <img src={avatarIcon} alt="User" className="avatar" />
-            <p className="username">amyrobson</p>
+            <img
+              src={require(`../assets${user.image.png.slice(1)}`)}
+              alt="User"
+              className="avatar"
+            />
+            <p className="username">{user.username}</p>
             {isCurrentUser && <p className="currentUser">you</p>}
-            <p className="time">1 month ago</p>
+            <p className="time">{createdAt}</p>
           </div>
-          <p className="commentText">
-            Impressive! Though it seems the drag feature could be improved. But
-            overall it looks incredible. You've nailed the design and the
-            responsiveness at various breakpoints works really well.
-          </p>
+          <p className="commentText">{content}</p>
         </div>
+        {/* TODO: Check if user = currentuser */}
         {isCurrentUser ? (
           <>
             <div className="reply">
@@ -47,7 +53,8 @@ const CommentItem = () => {
           </div>
         )}
       </div>
-      <CommentReply />
+      {/* TODO: Map through replies array and display replies */}
+      {replies && <CommentReply />}
     </>
   );
 };

@@ -1,16 +1,17 @@
-import CommentItem from "./components/CommentItem";
+import CommentList from "./components/CommentList";
 import CreateComment from "./components/CreateComment";
+import { CommentContextProvider } from "./context/CommentContext";
 
 function App() {
   return (
-    <div>
-      <main>
-        <CommentItem />
-        <CommentItem />
-        <CommentItem />
-        <CreateComment />
-      </main>
-    </div>
+    <CommentContextProvider>
+      <div>
+        <main>
+          <CommentList />
+          <CreateComment />
+        </main>
+      </div>
+    </CommentContextProvider>
   );
 }
 
