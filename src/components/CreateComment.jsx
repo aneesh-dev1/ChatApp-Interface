@@ -1,9 +1,15 @@
-import avatarIcon from "../assets/images/avatars/image-amyrobson.png";
+import { useContext } from "react";
+import CommentContext from "../context/CommentContext";
 
 const CreateComment = () => {
+  const { currentUser } = useContext(CommentContext);
   return (
     <div className="comment createComment">
-      <img src={avatarIcon} alt="User" className="avatar comment" />
+      <img
+        src={require(`../assets${currentUser.image.png.slice(1)}`)}
+        alt="User"
+        className="avatar comment"
+      />
       <form className="commentForm">
         <textarea
           className="inputComment"

@@ -94,7 +94,7 @@ main {
 }
 
 .currentUser {
-  padding: 0rem 0.5rem 0.5rem;
+  padding: 0rem 0.5rem 0.3rem;
   border-radius: 0.2rem;
   margin-left: -0.3rem;
   height: 1rem;
@@ -116,7 +116,7 @@ main {
 .reply {
   position: absolute;
   right: 1.5rem;
-  top: 1.3rem;
+  top: 1.7rem;
 }
 
 .reply p {
@@ -184,13 +184,14 @@ main {
 }
 
 /* Vertical Line */
-.replyComment::before {
+
+.line::before {
   content: " ";
   display: block;
   position: absolute;
   height: 100%;
   top: 0;
-  left: -2.3rem;
+  left: 2.5rem;
   border-left: 0.15rem solid rgb(213, 215, 218);
 }
 

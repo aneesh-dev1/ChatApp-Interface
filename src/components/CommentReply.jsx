@@ -1,33 +1,60 @@
 import plusIcon from "../assets/images/icon-plus.svg";
 import minusIcon from "../assets/images/icon-minus.svg";
 import replyIcon from "../assets/images/icon-reply.svg";
-import avatarIcon from "../assets/images/avatars/image-amyrobson.png";
+import deleteIcon from "../assets/images/icon-delete.svg";
+import editIcon from "../assets/images/icon-edit.svg";
+import CommentContext from "../context/CommentContext";
+import { useContext, useEffect, useState } from "react";
 
-const CommentReply = () => {
+const CommentReply = ({ reply }) => {
+  const { currentUser } = useContext(CommentContext);
+
+  const { replyingTo, score, createdAt, user, content } = reply;
+
+  const [isCurrentUser, setIsCurrentUser] = useState(false);
+
+  useEffect(() => {
+    currentUser.username === user.username && setIsCurrentUser(true);
+    console.log(isCurrentUser);
+  }, [currentUser.username, isCurrentUser, user.username]);
   return (
     <div className="comment replyComment">
       <div className="vote">
         <img src={plusIcon} alt="+" />
-        <p>12</p>
+        <p>{score}</p>
         <img src={minusIcon} alt="-" />
       </div>
       <div className="commentContent">
         <div className="title">
-          <img src={avatarIcon} alt="User" className="avatar" />
-          <p className="username">amyrobson</p>
-          <p className="time">1 month ago</p>
+          <img
+            src={require(`../assets${user.image.png.slice(1)}`)}
+            alt="User"
+            className="avatar"
+          />
+          <p className="username">{user.username}</p>
+          {isCurrentUser && <p className="currentUser">you</p>}
+          <p className="time">{createdAt}</p>
         </div>
         <p className="commentText">
-          <span className="username">@maxblagun</span> Impressive! Though it
-          seems the drag feature could be improved. But overall it looks
-          incredible. You've nailed the design and the responsiveness at various
-          breakpoints works really well.
+          <span className="username">@{replyingTo}</span> {content}
         </p>
       </div>
-      <div className="reply">
-        <img src={replyIcon} alt="reply" />
-        <p>&nbsp; Reply</p>
-      </div>
+      {isCurrentUser ? (
+        <>
+          <div className="reply">
+            <img src={deleteIcon} alt="delete" />
+            <p id="delete">&nbsp; Delete</p>
+            <p>&nbsp; &nbsp; &nbsp;</p>
+            <img src={editIcon} alt="edit" />
+            <p>&nbsp; Edit</p>
+          </div>
+        </>
+      ) : (
+        <div className="reply">
+          <img src={replyIcon} alt="reply" />
+          <p>&nbsp; Reply</p>
+        </div>
+      )}
     </div>
   );
 };

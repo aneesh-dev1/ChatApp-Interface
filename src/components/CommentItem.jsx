@@ -3,9 +3,8 @@ import minusIcon from "../assets/images/icon-minus.svg";
 import replyIcon from "../assets/images/icon-reply.svg";
 import deleteIcon from "../assets/images/icon-delete.svg";
 import editIcon from "../assets/images/icon-edit.svg";
-import avatarIcon from "../assets/images/avatars/image-amyrobson.png";
 import CommentReply from "./CommentReply";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import CommentContext from "../context/CommentContext";
 
 const CommentItem = ({ comment }) => {
@@ -14,6 +13,12 @@ const CommentItem = ({ comment }) => {
   let { score, createdAt, user, content, replies } = comment;
 
   const [isCurrentUser, setIsCurrentUser] = useState(false);
+
+  useEffect(() => {
+    currentUser.username === user.username && setIsCurrentUser(true);
+    console.log(isCurrentUser);
+  }, [currentUser.username, isCurrentUser, user.username]);
+
   return (
     <>
       <div className="comment">
@@ -35,7 +40,6 @@ const CommentItem = ({ comment }) => {
           </div>
           <p className="commentText">{content}</p>
         </div>
-        {/* TODO: Check if user = currentuser */}
         {isCurrentUser ? (
           <>
             <div className="reply">
@@ -53,8 +57,15 @@ const CommentItem = ({ comment }) => {
           </div>
         )}
       </div>
-      {/* TODO: Map through replies array and display replies */}
-      {replies && <CommentReply />}
+      <div className="container">
+        {replies && (
+          <div className="line">
+            {replies.map((reply, id) => (
+              <CommentReply key={id} reply={reply} />
+            ))}
+          </div>
+        )}
+      </div>
     </>
   );
 };
