@@ -47,15 +47,22 @@ const CommentItem = ({ comment }) => {
         {isCurrentUser ? (
           <>
             <div className="reply">
-              <img src={deleteIcon} alt="delete" />
-              <p id="delete">&nbsp; Delete</p>
+              <div className="button delete">
+                <img src={deleteIcon} alt="delete" />
+                <p>&nbsp; Delete</p>
+              </div>
               <p>&nbsp; &nbsp; &nbsp;</p>
-              <img src={editIcon} alt="edit" />
-              <p>&nbsp; Edit</p>
+              <div className="button edit">
+                <img src={editIcon} alt="edit" />
+                <p>&nbsp; Edit</p>
+              </div>
             </div>
           </>
         ) : (
-          <div className="reply" onClick={() => setCreateReply(!createReply)}>
+          <div
+            className="reply button edit"
+            onClick={() => setCreateReply(!createReply)}
+          >
             <img src={replyIcon} alt="reply" />
             <p>&nbsp; Reply</p>
           </div>

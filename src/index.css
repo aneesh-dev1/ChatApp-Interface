@@ -120,14 +120,26 @@ main {
   top: 1.7rem;
 }
 
+.button,
 .reply p {
   display: inline;
-  color: var(--primary-blue);
   font-weight: 500;
 }
 
-#delete {
+.button.delete {
   color: var(--primary-red);
+}
+
+.button.edit {
+  color: var(--primary-blue);
+}
+
+.button.edit:hover {
+  color: var(--primary-grayish-blue);
+}
+
+.button.delete:hover {
+  color: var(--primary-pale-red);
 }
 
 /** CreateComment Component **/
@@ -173,9 +185,10 @@ main {
   border-radius: 0.5rem;
   height: 2.5rem;
   box-sizing: border-box;
-  /* position: absolute;
-  top: 0rem;
-  right: 0.5rem; */
+}
+
+.submit:hover {
+  background-color: var(--primary-grayish-blue);
 }
 
 /* CommentReply Component  */
