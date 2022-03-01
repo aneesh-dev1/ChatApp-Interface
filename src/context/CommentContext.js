@@ -6,10 +6,11 @@ const CommentContext = createContext();
 export const CommentContextProvider = ({ children }) => {
   const [state, setState] = useState(data);
 
+  const [createReply, setCreateReply] = useState(false);
+
   const { comments, currentUser } = state;
 
   const addNewComment = (comment) => {
-    console.log(comments.at(comments.length - 1).id);
     const newComment = {
       id: comments.at(comments.length - 1).id + 1,
       content: comment,
@@ -21,7 +22,23 @@ export const CommentContextProvider = ({ children }) => {
     };
     comments.push(newComment);
     setState((prevState) => ({ ...prevState, comments }));
-    console.log(state);
+  };
+
+  const addNewReply = (message, commentId, replyTo) => {
+    const comment = comments.find((item) => item.id === commentId);
+    const replyToUsername = replyTo ? replyTo : comment.user.username;
+    const newReply = {
+      id: comment.replies.length
+        ? comment.replies.at(comment.replies.length - 1).id + 1
+        : 1,
+      content: message,
+      // Change time to calculated field
+      createdAt: "5 seconds ago",
+      replyingTo: replyToUsername,
+      score: 5,
+      user: currentUser,
+    };
+    comment.replies.push(newReply);
   };
 
   useEffect(() => {
@@ -29,7 +46,15 @@ export const CommentContextProvider = ({ children }) => {
   }, [state]);
 
   return (
-    <CommentContext.Provider value={{ ...state, addNewComment }}>
+    <CommentContext.Provider
+      value={{
+        ...state,
+        createReply,
+        setCreateReply,
+        addNewComment,
+        addNewReply,
+      }}
+    >
       {children}
     </CommentContext.Provider>
   );

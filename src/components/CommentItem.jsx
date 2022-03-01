@@ -6,11 +6,13 @@ import editIcon from "../assets/images/icon-edit.svg";
 import CommentReply from "./CommentReply";
 import { useState, useContext, useEffect } from "react";
 import CommentContext from "../context/CommentContext";
+import CreateComment from "./CreateComment";
 
 const CommentItem = ({ comment }) => {
-  const { currentUser } = useContext(CommentContext);
+  const { currentUser, createReply, setCreateReply } =
+    useContext(CommentContext);
 
-  let { score, createdAt, user, content, replies } = comment;
+  let { id, score, createdAt, user, content, replies } = comment;
 
   const [isCurrentUser, setIsCurrentUser] = useState(false);
 
@@ -53,12 +55,15 @@ const CommentItem = ({ comment }) => {
             </div>
           </>
         ) : (
-          <div className="reply">
+          <div className="reply" onClick={() => setCreateReply(!createReply)}>
             <img src={replyIcon} alt="reply" />
             <p>&nbsp; Reply</p>
           </div>
         )}
       </div>
+      {createReply && (
+        <CreateComment key={id} buttonText={"REPLY"} commentId={id} />
+      )}
       <div className="container">
         {replies && (
           <div className="line">

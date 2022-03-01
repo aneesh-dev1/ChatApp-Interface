@@ -1,13 +1,19 @@
 import { useContext, useState } from "react";
 import CommentContext from "../context/CommentContext";
 
-const CreateComment = () => {
-  const { currentUser, addNewComment } = useContext(CommentContext);
+const CreateComment = ({ buttonText, commentId }) => {
+  const { currentUser, addNewComment, addNewReply, setCreateReply } =
+    useContext(CommentContext);
   const [text, setText] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    addNewComment(text);
+    if (buttonText && buttonText === "REPLY") {
+      addNewReply(text, commentId);
+      setCreateReply(false);
+    } else if (!buttonText) {
+      addNewComment(text);
+    }
     setText("");
   };
   return (
@@ -27,7 +33,7 @@ const CreateComment = () => {
           value={text}
         />
         <button className="submit" type="submit">
-          SEND
+          {buttonText ? buttonText : "SEND"}
         </button>
       </form>
     </div>
