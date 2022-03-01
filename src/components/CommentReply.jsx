@@ -4,14 +4,17 @@ import replyIcon from "../assets/images/icon-reply.svg";
 import deleteIcon from "../assets/images/icon-delete.svg";
 import editIcon from "../assets/images/icon-edit.svg";
 import CommentContext from "../context/CommentContext";
+import CreateComment from "./CreateComment";
 import { useContext, useEffect, useState } from "react";
 
-const CommentReply = ({ reply }) => {
+const CommentReply = ({ reply, commentId }) => {
   const { currentUser } = useContext(CommentContext);
 
-  const { replyingTo, score, createdAt, user, content } = reply;
+  const { id, replyingTo, score, createdAt, user, content } = reply;
 
   const [isCurrentUser, setIsCurrentUser] = useState(false);
+
+  const [createReply, setCreateReply] = useState(false);
 
   const [num, setNum] = useState(score);
 
@@ -20,44 +23,56 @@ const CommentReply = ({ reply }) => {
     console.log(isCurrentUser);
   }, [currentUser.username, isCurrentUser, user.username]);
   return (
-    <div className="comment replyComment">
-      <div className="vote">
-        <img src={plusIcon} alt="+" onClick={() => setNum(num + 1)} />
-        <p>{num}</p>
-        <img src={minusIcon} alt="-" onClick={() => setNum(num - 1)} />
-      </div>
-      <div className="commentContent">
-        <div className="title">
-          <img
-            src={require(`../assets${user.image.png.slice(1)}`)}
-            alt="User"
-            className="avatar"
-          />
-          <p className="username">{user.username}</p>
-          {isCurrentUser && <p className="currentUser">you</p>}
-          <p className="time">{createdAt}</p>
+    <>
+      <div className="comment replyComment">
+        <div className="vote">
+          <img src={plusIcon} alt="+" onClick={() => setNum(num + 1)} />
+          <p>{num}</p>
+          <img src={minusIcon} alt="-" onClick={() => setNum(num - 1)} />
         </div>
-        <p className="commentText">
-          <span className="username">@{replyingTo}</span> {content}
-        </p>
-      </div>
-      {isCurrentUser ? (
-        <>
-          <div className="reply">
-            <img src={deleteIcon} alt="delete" />
-            <p id="delete">&nbsp; Delete</p>
-            <p>&nbsp; &nbsp; &nbsp;</p>
-            <img src={editIcon} alt="edit" />
-            <p>&nbsp; Edit</p>
+        <div className="commentContent">
+          <div className="title">
+            <img
+              src={require(`../assets${user.image.png.slice(1)}`)}
+              alt="User"
+              className="avatar"
+            />
+            <p className="username">{user.username}</p>
+            {isCurrentUser && <p className="currentUser">you</p>}
+            <p className="time">{createdAt}</p>
           </div>
-        </>
-      ) : (
-        <div className="reply">
-          <img src={replyIcon} alt="reply" />
-          <p>&nbsp; Reply</p>
+          <p className="commentText">
+            <span className="username">@{replyingTo}</span> {content}
+          </p>
+        </div>
+        {isCurrentUser ? (
+          <>
+            <div className="reply">
+              <img src={deleteIcon} alt="delete" />
+              <p id="delete">&nbsp; Delete</p>
+              <p>&nbsp; &nbsp; &nbsp;</p>
+              <img src={editIcon} alt="edit" />
+              <p>&nbsp; Edit</p>
+            </div>
+          </>
+        ) : (
+          <div className="reply" onClick={() => setCreateReply(!createReply)}>
+            <img src={replyIcon} alt="reply" />
+            <p>&nbsp; Reply</p>
+          </div>
+        )}
+      </div>
+      {createReply && (
+        <div className="replyComment">
+          <CreateComment
+            key={id}
+            buttonText={"REPLY"}
+            replyId={id}
+            commentId={commentId}
+          />
         </div>
       )}
-    </div>
+    </>
   );
 };
 

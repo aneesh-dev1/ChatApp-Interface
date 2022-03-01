@@ -1,16 +1,17 @@
 import { useContext, useState } from "react";
 import CommentContext from "../context/CommentContext";
 
-const CreateComment = ({ buttonText, commentId }) => {
-  const { currentUser, addNewComment, addNewReply, setCreateReply } =
+const CreateComment = ({ buttonText, commentId, replyId }) => {
+  const { currentUser, addNewComment, addNewReply } =
     useContext(CommentContext);
   const [text, setText] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (buttonText && buttonText === "REPLY") {
+    if (buttonText && buttonText === "REPLY" && !replyId) {
       addNewReply(text, commentId);
-      setCreateReply(false);
+    } else if (buttonText && buttonText === "REPLY" && replyId) {
+      addNewReply(text, commentId, replyId);
     } else if (!buttonText) {
       addNewComment(text);
     }

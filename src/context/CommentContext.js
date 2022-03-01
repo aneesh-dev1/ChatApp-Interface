@@ -24,9 +24,11 @@ export const CommentContextProvider = ({ children }) => {
     setState((prevState) => ({ ...prevState, comments }));
   };
 
-  const addNewReply = (message, commentId, replyTo) => {
+  const addNewReply = (message, commentId, replyId) => {
     const comment = comments.find((item) => item.id === commentId);
-    const replyToUsername = replyTo ? replyTo : comment.user.username;
+    const replyToUsername = replyId
+      ? comment.replies.find((item) => item.id === replyId).user.username
+      : comment.user.username;
     const newReply = {
       id: comment.replies.length
         ? comment.replies.at(comment.replies.length - 1).id + 1
@@ -39,6 +41,7 @@ export const CommentContextProvider = ({ children }) => {
       user: currentUser,
     };
     comment.replies.push(newReply);
+    setState((prevState) => ({ ...prevState, comments }));
   };
 
   useEffect(() => {

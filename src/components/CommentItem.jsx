@@ -9,13 +9,13 @@ import CommentContext from "../context/CommentContext";
 import CreateComment from "./CreateComment";
 
 const CommentItem = ({ comment }) => {
-  const { currentUser, createReply, setCreateReply } =
-    useContext(CommentContext);
+  const { currentUser } = useContext(CommentContext);
 
-  let { id, score, createdAt, user, content, replies } = comment;
+  const { id, score, createdAt, user, content, replies } = comment;
 
   const [isCurrentUser, setIsCurrentUser] = useState(false);
 
+  const [createReply, setCreateReply] = useState(false);
   const [num, setNum] = useState(score);
 
   useEffect(() => {
@@ -68,7 +68,7 @@ const CommentItem = ({ comment }) => {
         {replies && (
           <div className="line">
             {replies.map((reply, id) => (
-              <CommentReply key={id} reply={reply} />
+              <CommentReply key={id} reply={reply} commentId={comment.id} />
             ))}
           </div>
         )}
