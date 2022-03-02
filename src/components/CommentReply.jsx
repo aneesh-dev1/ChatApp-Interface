@@ -8,7 +8,7 @@ import CreateComment from "./CreateComment";
 import { useContext, useEffect, useState } from "react";
 
 const CommentReply = ({ reply, commentId }) => {
-  const { currentUser, changeScore, setDeleteComment } =
+  const { currentUser, changeScore, deleteComment } =
     useContext(CommentContext);
 
   const { id, replyingTo, score, createdAt, user, content } = reply;
@@ -59,7 +59,7 @@ const CommentReply = ({ reply, commentId }) => {
             <div className="reply">
               <div
                 className="button delete"
-                onClick={() => setDeleteComment(true)}
+                onClick={() => deleteComment(commentId, id)}
               >
                 <img src={deleteIcon} alt="delete" />
                 <p>&nbsp; Delete</p>

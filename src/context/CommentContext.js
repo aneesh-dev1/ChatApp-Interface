@@ -6,7 +6,12 @@ const CommentContext = createContext();
 export const CommentContextProvider = ({ children }) => {
   const [state, setState] = useState(data);
 
-  const [deleteComment, setDeleteComment] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+  const [commentToDelete, setCommentToDelete] = useState({
+    commentId: null,
+    replyId: null,
+  });
 
   const [createReply, setCreateReply] = useState(false);
 
@@ -57,6 +62,41 @@ export const CommentContextProvider = ({ children }) => {
     setState((prevState) => ({ ...prevState, comments }));
   };
 
+  const deleteComment = (commentId, replyId) => {
+    setShowDeleteModal(true);
+
+    setCommentToDelete({ commentId, replyId });
+  };
+
+  const confirmDelete = () => {
+    if (!commentToDelete.commentId) {
+      setShowDeleteModal(false);
+      return;
+    }
+    const comment = comments.find(
+      (item) => item.id === commentToDelete.commentId
+    );
+    let filtered;
+    if (commentToDelete.commentId && !commentToDelete.replyId) {
+      filtered = comments.filter((item) => item !== comment);
+      setState((prevState) => ({ ...prevState, comments: filtered }));
+    } else if (commentToDelete.commentId && commentToDelete.replyId) {
+      filtered = comment.replies.filter(
+        (item) => item.id !== commentToDelete.replyId
+      );
+      comment.replies = filtered;
+      setState((prevState) => ({ ...prevState, comments }));
+    }
+
+    cancelDelete();
+  };
+
+  const cancelDelete = () => {
+    setCommentToDelete({ commentId: null, replyId: null });
+
+    setShowDeleteModal(false);
+  };
+
   useEffect(() => {
     console.log(state);
   }, [state]);
@@ -66,8 +106,10 @@ export const CommentContextProvider = ({ children }) => {
       value={{
         ...state,
         createReply,
+        showDeleteModal,
         deleteComment,
-        setDeleteComment,
+        confirmDelete,
+        cancelDelete,
         setCreateReply,
         addNewComment,
         addNewReply,
