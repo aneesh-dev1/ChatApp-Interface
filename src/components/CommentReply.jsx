@@ -8,15 +8,13 @@ import CreateComment from "./CreateComment";
 import { useContext, useEffect, useState } from "react";
 
 const CommentReply = ({ reply, commentId }) => {
-  const { currentUser } = useContext(CommentContext);
+  const { currentUser, changeScore } = useContext(CommentContext);
 
   const { id, replyingTo, score, createdAt, user, content } = reply;
 
   const [isCurrentUser, setIsCurrentUser] = useState(false);
 
   const [createReply, setCreateReply] = useState(false);
-
-  const [num, setNum] = useState(score);
 
   useEffect(() => {
     currentUser.username === user.username && setIsCurrentUser(true);
@@ -26,9 +24,17 @@ const CommentReply = ({ reply, commentId }) => {
     <>
       <div className="comment replyComment">
         <div className="vote">
-          <img src={plusIcon} alt="+" onClick={() => setNum(num + 1)} />
-          <p>{num}</p>
-          <img src={minusIcon} alt="-" onClick={() => setNum(num - 1)} />
+          <img
+            src={plusIcon}
+            alt="+"
+            onClick={() => changeScore("INC", commentId, id)}
+          />
+          <p>{score}</p>
+          <img
+            src={minusIcon}
+            alt="-"
+            onClick={() => changeScore("DEC", commentId, id)}
+          />
         </div>
         <div className="commentContent">
           <div className="title">

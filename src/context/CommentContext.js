@@ -44,6 +44,17 @@ export const CommentContextProvider = ({ children }) => {
     setState((prevState) => ({ ...prevState, comments }));
   };
 
+  const changeScore = (whereTo, commentId, replyId) => {
+    const comment = comments.find((item) => item.id === commentId);
+    if (replyId) {
+      const reply = comment.replies.find((item) => item.id === replyId);
+      whereTo === "INC" ? reply.score++ : reply.score--;
+    } else {
+      whereTo === "INC" ? comment.score++ : comment.score--;
+    }
+    setState((prevState) => ({ ...prevState, comments }));
+  };
+
   useEffect(() => {
     console.log(state);
   }, [state]);
@@ -56,6 +67,7 @@ export const CommentContextProvider = ({ children }) => {
         setCreateReply,
         addNewComment,
         addNewReply,
+        changeScore,
       }}
     >
       {children}
