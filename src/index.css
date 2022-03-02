@@ -23,6 +23,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--neutral-gray);
   font-size: var(--font-size);
+  color: var(--neutral-grayish-blue);
+}
+
+html {
+  position: relative;
 }
 
 code {
@@ -224,6 +229,69 @@ main {
 .commentText .username {
   color: var(--primary-blue);
   margin-right: 0.1rem;
+}
+
+/* Delete Comment Component */
+.backdrop {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: var(--neutral-grayish-blue);
+  opacity: 0.4;
+  z-index: 1;
+}
+
+.modal {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  opacity: 1;
+  width: 25rem;
+  z-index: 3;
+  height: 15.5rem;
+  background-color: var(--neutral-white);
+  margin: 28% auto;
+  padding: 2rem 2rem 1.7rem;
+  border-radius: 0.6rem;
+  box-sizing: border-box;
+}
+
+.modal h1 {
+  color: var(--neutral-dark-blue);
+  font-size: 1.5rem;
+  margin: 0rem 0rem 1.3rem;
+}
+
+.modal p {
+  line-height: 1.4;
+  padding-right: 0.3rem;
+  margin: 0px;
+}
+
+.flex {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.submit.button {
+  padding: 0.85rem 1.7rem;
+  height: 2.6rem;
+  font-size: 0.8rem;
+}
+
+.submit.cancel {
+  background-color: var(--neutral-grayish-blue);
+}
+
+.submit.delete {
+  color: var(--neutral-white);
+  background-color: var(--primary-red);
 }
 
 /* TODO: Create mobile styles - remember to check console for breakpoint */

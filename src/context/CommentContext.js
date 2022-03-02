@@ -6,6 +6,8 @@ const CommentContext = createContext();
 export const CommentContextProvider = ({ children }) => {
   const [state, setState] = useState(data);
 
+  const [deleteComment, setDeleteComment] = useState(false);
+
   const [createReply, setCreateReply] = useState(false);
 
   const { comments, currentUser } = state;
@@ -64,6 +66,8 @@ export const CommentContextProvider = ({ children }) => {
       value={{
         ...state,
         createReply,
+        deleteComment,
+        setDeleteComment,
         setCreateReply,
         addNewComment,
         addNewReply,

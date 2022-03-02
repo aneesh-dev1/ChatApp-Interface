@@ -7,9 +7,11 @@ import CommentReply from "./CommentReply";
 import { useState, useContext, useEffect } from "react";
 import CommentContext from "../context/CommentContext";
 import CreateComment from "./CreateComment";
+import DeleteModal from "./DeleteModal";
 
 const CommentItem = ({ comment }) => {
-  const { currentUser, changeScore } = useContext(CommentContext);
+  const { currentUser, changeScore, setDeleteComment, deleteComment } =
+    useContext(CommentContext);
 
   const { id, score, createdAt, user, content, replies } = comment;
 
@@ -23,6 +25,7 @@ const CommentItem = ({ comment }) => {
 
   return (
     <>
+      {deleteComment && <DeleteModal />}
       <div className="comment">
         <div className="vote">
           <img
@@ -55,7 +58,10 @@ const CommentItem = ({ comment }) => {
         {isCurrentUser ? (
           <>
             <div className="reply">
-              <div className="button delete">
+              <div
+                className="button delete"
+                onClick={() => setDeleteComment(true)}
+              >
                 <img src={deleteIcon} alt="delete" />
                 <p>&nbsp; Delete</p>
               </div>
