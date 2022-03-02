@@ -25,9 +25,19 @@ const CommentItem = ({ comment }) => {
     <>
       <div className="comment">
         <div className="vote">
-          <img src={plusIcon} alt="+" onClick={() => changeScore("INC", id)} />
+          <img
+            src={plusIcon}
+            alt="+"
+            className="clickable"
+            onClick={() => changeScore("INC", id)}
+          />
           <p>{score}</p>
-          <img src={minusIcon} alt="-" onClick={() => changeScore("DEC", id)} />
+          <img
+            src={minusIcon}
+            alt="-"
+            className="clickable"
+            onClick={() => changeScore("DEC", id)}
+          />
         </div>
         <div className="commentContent">
           <div className="title">

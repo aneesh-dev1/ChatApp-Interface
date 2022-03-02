@@ -26,12 +26,14 @@ const CommentReply = ({ reply, commentId }) => {
         <div className="vote">
           <img
             src={plusIcon}
+            className="clickable"
             alt="+"
             onClick={() => changeScore("INC", commentId, id)}
           />
           <p>{score}</p>
           <img
             src={minusIcon}
+            className="clickable"
             alt="-"
             onClick={() => changeScore("DEC", commentId, id)}
           />

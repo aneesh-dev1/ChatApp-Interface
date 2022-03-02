@@ -126,6 +126,10 @@ main {
   font-weight: 500;
 }
 
+.clickable {
+  cursor: pointer;
+}
+
 .button.delete {
   color: var(--primary-red);
 }
@@ -135,10 +139,12 @@ main {
 }
 
 .button.edit:hover {
+  cursor: pointer;
   color: var(--primary-grayish-blue);
 }
 
 .button.delete:hover {
+  cursor: pointer;
   color: var(--primary-pale-red);
 }
 
@@ -188,6 +194,7 @@ main {
 }
 
 .submit:hover {
+  cursor: pointer;
   background-color: var(--primary-grayish-blue);
 }
 
