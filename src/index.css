@@ -53,6 +53,10 @@ main {
   display: flex;
 }
 
+.comment.editComment {
+  height: 15.3rem;
+}
+
 .vote {
   width: 1.2rem;
   height: 5rem;
@@ -172,7 +176,13 @@ main {
   display: flex;
   margin: 0rem auto;
   flex-direction: row;
+  justify-content: flex-end;
   position: relative;
+}
+
+.commentForm.updateForm {
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .inputComment {
@@ -192,10 +202,17 @@ main {
   color: var(--neutral-white);
   background-color: var(--primary-blue);
   padding: 0.7rem 1.3rem;
+  width: 5.2rem;
   border: none;
   border-radius: 0.5rem;
   height: 2.5rem;
   box-sizing: border-box;
+}
+
+.submit.update {
+  padding: 0.7rem 1rem;
+  margin-right: 1rem;
+  margin-top: 1rem;
 }
 
 .submit:hover {

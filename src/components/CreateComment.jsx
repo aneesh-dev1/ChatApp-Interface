@@ -29,7 +29,7 @@ const CreateComment = ({ buttonText, commentId, replyId }) => {
           className="inputComment"
           name="comment"
           placeholder="Add a comment..."
-          style={{ height: "4rem", width: "80%" }}
+          style={{ height: "4rem", width: "90%" }}
           onChange={(event) => setText(event.target.value)}
           value={text}
         />

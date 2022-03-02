@@ -51,6 +51,17 @@ export const CommentContextProvider = ({ children }) => {
     setState((prevState) => ({ ...prevState, comments }));
   };
 
+  const updateComment = (message, commentId, replyId) => {
+    const comment = comments.find((item) => item.id === commentId);
+    if (replyId) {
+      const reply = comment.replies.find((item) => item.id === replyId);
+      reply.content = message;
+    } else if (!replyId) {
+      comment.content = message;
+    }
+    setState((prevState) => ({ ...prevState, comments }));
+  };
+
   const changeScore = (whereTo, commentId, replyId) => {
     const comment = comments.find((item) => item.id === commentId);
     if (replyId) {
@@ -108,6 +119,7 @@ export const CommentContextProvider = ({ children }) => {
         createReply,
         showDeleteModal,
         deleteComment,
+        updateComment,
         confirmDelete,
         cancelDelete,
         setCreateReply,

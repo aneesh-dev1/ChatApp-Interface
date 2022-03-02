@@ -10,12 +10,21 @@ import CreateComment from "./CreateComment";
 import DeleteModal from "./DeleteModal";
 
 const CommentItem = ({ comment }) => {
-  const { currentUser, changeScore, deleteComment, showDeleteModal } =
-    useContext(CommentContext);
+  const {
+    currentUser,
+    changeScore,
+    deleteComment,
+    showDeleteModal,
+    updateComment,
+  } = useContext(CommentContext);
 
   const { id, score, createdAt, user, content, replies } = comment;
 
   const [isCurrentUser, setIsCurrentUser] = useState(false);
+
+  const [editComment, setEditComment] = useState(false);
+
+  const [editText, setEditText] = useState(content);
 
   const [createReply, setCreateReply] = useState(false);
 
@@ -23,10 +32,16 @@ const CommentItem = ({ comment }) => {
     currentUser.username === user.username && setIsCurrentUser(true);
   }, [currentUser.username, isCurrentUser, user.username]);
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    updateComment(editText, id);
+    setEditComment(false);
+  };
+
   return (
     <>
       {showDeleteModal && <DeleteModal />}
-      <div className="comment">
+      <div className={editComment ? "comment editComment" : "comment"}>
         <div className="vote">
           <img
             src={plusIcon}
@@ -53,7 +68,21 @@ const CommentItem = ({ comment }) => {
             {isCurrentUser && <p className="currentUser">you</p>}
             <p className="time">{createdAt}</p>
           </div>
-          <p className="commentText">{content}</p>
+          {editComment ? (
+            <form className="commentForm updateForm" onSubmit={handleSubmit}>
+              <textarea
+                className="inputComment"
+                style={{ height: "4rem", width: "40rem" }}
+                autoFocus
+                value={editText}
+                onChange={(event) => setEditText(event.target.value)}
+              />
+
+              <button className="submit update">UPDATE</button>
+            </form>
+          ) : (
+            <p className="commentText"> {content}</p>
+          )}
         </div>
         {isCurrentUser ? (
           <>
@@ -63,7 +92,10 @@ const CommentItem = ({ comment }) => {
                 <p>&nbsp; Delete</p>
               </div>
               <p>&nbsp; &nbsp; &nbsp;</p>
-              <div className="button edit">
+              <div
+                className="button edit"
+                onClick={() => setEditComment(!editComment)}
+              >
                 <img src={editIcon} alt="edit" />
                 <p>&nbsp; Edit</p>
               </div>

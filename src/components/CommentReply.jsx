@@ -8,12 +8,16 @@ import CreateComment from "./CreateComment";
 import { useContext, useEffect, useState } from "react";
 
 const CommentReply = ({ reply, commentId }) => {
-  const { currentUser, changeScore, deleteComment } =
+  const { currentUser, changeScore, deleteComment, updateComment } =
     useContext(CommentContext);
 
   const { id, replyingTo, score, createdAt, user, content } = reply;
 
   const [isCurrentUser, setIsCurrentUser] = useState(false);
+
+  const [editComment, setEditComment] = useState(false);
+
+  const [editText, setEditText] = useState(content);
 
   const [createReply, setCreateReply] = useState(false);
 
@@ -21,9 +25,21 @@ const CommentReply = ({ reply, commentId }) => {
     currentUser.username === user.username && setIsCurrentUser(true);
     console.log(isCurrentUser);
   }, [currentUser.username, isCurrentUser, user.username]);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    updateComment(editText, commentId, id);
+    setEditComment(false);
+  };
   return (
     <>
-      <div className="comment replyComment">
+      <div
+        className={
+          editComment
+            ? "comment editComment replyComment"
+            : "comment replyComment"
+        }
+      >
         <div className="vote">
           <img
             src={plusIcon}
@@ -50,9 +66,23 @@ const CommentReply = ({ reply, commentId }) => {
             {isCurrentUser && <p className="currentUser">you</p>}
             <p className="time">{createdAt}</p>
           </div>
-          <p className="commentText">
-            <span className="username">@{replyingTo}</span> {content}
-          </p>
+          {editComment ? (
+            <form className="commentForm updateForm" onSubmit={handleSubmit}>
+              <textarea
+                className="inputComment"
+                style={{ height: "4rem", width: "40rem" }}
+                autoFocus
+                value={editText}
+                onChange={(event) => setEditText(event.target.value)}
+              />
+
+              <button className="submit update">UPDATE</button>
+            </form>
+          ) : (
+            <p className="commentText">
+              <span className="username">@{replyingTo}</span> {content}
+            </p>
+          )}
         </div>
         {isCurrentUser ? (
           <>
@@ -65,7 +95,10 @@ const CommentReply = ({ reply, commentId }) => {
                 <p>&nbsp; Delete</p>
               </div>
               <p>&nbsp; &nbsp; &nbsp;</p>
-              <div className="button edit">
+              <div
+                className="button edit"
+                onClick={() => setEditComment(!editComment)}
+              >
                 <img src={editIcon} alt="edit" />
                 <p>&nbsp; Edit</p>
               </div>
