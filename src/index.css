@@ -37,7 +37,7 @@ code {
 
 main {
   margin: 5rem auto;
-  width: 60%;
+  width: 45rem;
 }
 
 /* Comment Component */
@@ -297,9 +297,10 @@ main {
 }
 
 .submit.button {
-  padding: 0.85rem 1.7rem;
+  padding: 0.9rem 7%;
   height: 2.6rem;
   font-size: 0.8rem;
+  width: fit-content;
 }
 
 .submit.cancel {
@@ -312,3 +313,116 @@ main {
 }
 
 /* TODO: Create mobile styles - remember to check console for breakpoint */
+
+@media screen and (max-width: 426px) {
+  main {
+    margin: 3rem auto;
+    width: 90%;
+  }
+
+  /* Comment Component */
+
+  .comment {
+    height: fit-content;
+    flex-direction: column-reverse;
+  }
+
+  .comment.editComment {
+    height: fit-content;
+  }
+
+  .vote {
+    width: 5rem;
+    height: 1.2rem;
+    display: flex;
+    margin-top: 1rem;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0.7rem 0.4rem;
+    align-items: center;
+  }
+
+  .reply {
+    right: 7%;
+    bottom: 1.7rem;
+    top: unset;
+  }
+
+  .avatar {
+    width: 2.2rem;
+    height: 2.2rem;
+  }
+
+  .currentUser,
+  .avatar,
+  .username,
+  .time {
+    margin: auto 0.55rem auto 0rem;
+  }
+
+  /* Create Comment Component */
+
+  .avatar.comment {
+    position: absolute;
+    bottom: 1rem;
+    left: 6.3%;
+    height: 2.6rem;
+    width: 2.6rem;
+    padding: 0px;
+  }
+
+  .createComment {
+    padding: 1.5rem 1.5rem 1rem;
+  }
+
+  .commentForm {
+    flex-direction: column;
+    position: relative;
+    align-items: flex-end;
+    margin-left: 0.5rem;
+  }
+
+  .inputComment {
+    margin-right: 0px;
+    width: 90% !important;
+  }
+
+  .submit {
+    margin-top: 1rem;
+  }
+
+  .submit.update {
+    margin-right: 0px;
+  }
+
+  /* CommentReply Component */
+
+  .replyComment {
+    width: 95%;
+    margin-left: 5%;
+    padding: 5.4%;
+  }
+
+  /* Vertical Line */
+
+  .line::before {
+    left: 1%;
+  }
+
+  /* DeleteComment Component */
+
+  .modal {
+    width: 90%;
+    height: fit-content;
+    margin: 130% auto;
+    padding: 2rem 2rem 1.7rem;
+  }
+
+  .modal h1 {
+    margin-bottom: 1rem;
+  }
+
+  .flex {
+    margin-top: 0rem;
+  }
+}

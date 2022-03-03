@@ -70,7 +70,7 @@ const CommentReply = ({ reply, commentId }) => {
             <form className="commentForm updateForm" onSubmit={handleSubmit}>
               <textarea
                 className="inputComment"
-                style={{ height: "4rem", width: "40rem" }}
+                style={{ height: "4rem", width: "32rem" }}
                 autoFocus
                 value={editText}
                 onChange={(event) => setEditText(event.target.value)}
