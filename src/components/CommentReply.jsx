@@ -1,8 +1,8 @@
 import plusIcon from "../assets/images/icon-plus.svg";
 import minusIcon from "../assets/images/icon-minus.svg";
-import replyIcon from "../assets/images/icon-reply.svg";
-import deleteIcon from "../assets/images/icon-delete.svg";
-import editIcon from "../assets/images/icon-edit.svg";
+import { ReactComponent as ReplyIcon } from "../assets/images/icon-reply.svg";
+import { ReactComponent as DeleteIcon } from "../assets/images/icon-delete.svg";
+import { ReactComponent as EditIcon } from "../assets/images/icon-edit.svg";
 import CommentContext from "../context/CommentContext";
 import CreateComment from "./CreateComment";
 import { useContext, useEffect, useState } from "react";
@@ -91,7 +91,7 @@ const CommentReply = ({ reply, commentId }) => {
                 className="button delete"
                 onClick={() => deleteComment(commentId, id)}
               >
-                <img src={deleteIcon} alt="delete" />
+                <DeleteIcon className="icon" />
                 <p>&nbsp; Delete</p>
               </div>
               <p>&nbsp; &nbsp; &nbsp;</p>
@@ -99,7 +99,7 @@ const CommentReply = ({ reply, commentId }) => {
                 className="button edit"
                 onClick={() => setEditComment(!editComment)}
               >
-                <img src={editIcon} alt="edit" />
+                <EditIcon className="icon" />
                 <p>&nbsp; Edit</p>
               </div>
             </div>
@@ -109,7 +109,7 @@ const CommentReply = ({ reply, commentId }) => {
             className="reply button edit"
             onClick={() => setCreateReply(!createReply)}
           >
-            <img src={replyIcon} alt="reply" />
+            <ReplyIcon className="icon" />
             <p>&nbsp; Reply</p>
           </div>
         )}

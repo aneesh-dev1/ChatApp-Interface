@@ -152,11 +152,18 @@ main {
   color: var(--primary-grayish-blue);
 }
 
+.button.edit:hover .icon path {
+  fill: var(--primary-grayish-blue);
+}
+
 .button.delete:hover {
   cursor: pointer;
   color: var(--primary-pale-red);
 }
 
+.button.delete:hover .icon path {
+  fill: var(--primary-pale-red);
+}
 /** CreateComment Component **/
 
 .avatar.comment {
