@@ -319,6 +319,22 @@ main {
   background-color: var(--primary-red);
 }
 
+/* Footer Component */
+
+footer {
+  position: absolute;
+  width: 100%;
+  font-size: 0.8rem;
+  text-align: center;
+  bottom: 0;
+  color: var(--primary-grayish-blue);
+}
+
+footer a {
+  color: var(--primary-pale-red);
+  text-decoration: none;
+}
+
 /* TODO: Create mobile styles - remember to check console for breakpoint */
 
 @media screen and (max-width: 426px) {

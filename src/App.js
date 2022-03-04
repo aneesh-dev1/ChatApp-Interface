@@ -1,5 +1,6 @@
 import CommentList from "./components/CommentList";
 import CreateComment from "./components/CreateComment";
+import Footer from "./components/Footer";
 import { CommentContextProvider } from "./context/CommentContext";
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
           <CommentList />
           <CreateComment />
         </main>
+        <Footer />
       </div>
     </CommentContextProvider>
   );
