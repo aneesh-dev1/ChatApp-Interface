@@ -4,7 +4,6 @@ import CommentItem from "./CommentItem";
 
 const CommentList = () => {
   const { comments } = useContext(CommentContext);
-  console.log(comments);
   return comments.map((comment, id) => (
     <CommentItem key={id} comment={comment} />
   ));

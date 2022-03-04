@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
 import data from "../data/data.json";
 
@@ -22,8 +22,7 @@ export const CommentContextProvider = ({ children }) => {
     const newComment = {
       id: comments.at(comments.length - 1).id + 1,
       content: comment,
-      // Change time to calculated field
-      createdAt: "5 seconds ago",
+      createdAt: new Date(),
       replies: [],
       score: 6,
       user: currentUser,
@@ -42,8 +41,7 @@ export const CommentContextProvider = ({ children }) => {
         ? comment.replies.at(comment.replies.length - 1).id + 1
         : 1,
       content: message,
-      // Change time to calculated field
-      createdAt: "5 seconds ago",
+      createdAt: new Date(),
       replyingTo: replyToUsername,
       score: 5,
       user: currentUser,
@@ -109,9 +107,32 @@ export const CommentContextProvider = ({ children }) => {
     setShowDeleteModal(false);
   };
 
-  useEffect(() => {
-    console.log(state);
-  }, [state]);
+  const timeDifference = (date1, date2) => {
+    var difference = date1.getTime() - date2.getTime();
+
+    var daysDifference = Math.floor(difference / 1000 / 60 / 60 / 24);
+    difference -= daysDifference * 1000 * 60 * 60 * 24;
+
+    var hoursDifference = Math.floor(difference / 1000 / 60 / 60);
+    difference -= hoursDifference * 1000 * 60 * 60;
+
+    var minutesDifference = Math.floor(difference / 1000 / 60);
+    difference -= minutesDifference * 1000 * 60;
+
+    var secondsDifference = Math.floor(difference / 1000);
+
+    if (daysDifference >= 1) {
+      return daysDifference + "days ago";
+    } else if (hoursDifference >= 1) {
+      return hoursDifference + "hours ago";
+    } else if (minutesDifference >= 1) {
+      return minutesDifference + "minutes ago";
+    } else if (secondsDifference >= 1) {
+      return secondsDifference + "seconds ago";
+    } else {
+      return "now";
+    }
+  };
 
   return (
     <CommentContext.Provider
@@ -119,6 +140,7 @@ export const CommentContextProvider = ({ children }) => {
         ...state,
         createReply,
         showDeleteModal,
+        timeDifference,
         deleteComment,
         updateComment,
         confirmDelete,

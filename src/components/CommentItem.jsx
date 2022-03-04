@@ -4,7 +4,7 @@ import { ReactComponent as ReplyIcon } from "../assets/images/icon-reply.svg";
 import { ReactComponent as DeleteIcon } from "../assets/images/icon-delete.svg";
 import { ReactComponent as EditIcon } from "../assets/images/icon-edit.svg";
 import CommentReply from "./CommentReply";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 import CommentContext from "../context/CommentContext";
 import CreateComment from "./CreateComment";
 import DeleteModal from "./DeleteModal";
@@ -16,6 +16,7 @@ const CommentItem = ({ comment }) => {
     deleteComment,
     showDeleteModal,
     updateComment,
+    timeDifference,
   } = useContext(CommentContext);
 
   const { id, score, createdAt, user, content, replies } = comment;
@@ -28,9 +29,32 @@ const CommentItem = ({ comment }) => {
 
   const [createReply, setCreateReply] = useState(false);
 
+  const [dateDifference, setDateDifference] = useState(null);
+
+  const isMounted = useRef(true);
+  const isMounted2 = useRef(true);
+
   useEffect(() => {
-    currentUser.username === user.username && setIsCurrentUser(true);
-  }, [currentUser.username, isCurrentUser, user.username]);
+    if (isMounted2) {
+      currentUser.username === user.username && setIsCurrentUser(true);
+    }
+    return () => {
+      isMounted2.current = false;
+    };
+  }, [currentUser.username, isCurrentUser, user.username, isMounted2]);
+
+  useEffect(() => {
+    if (isMounted) {
+      setInterval(() => {
+        if (new Date(createdAt).getTime() > 0) {
+          setDateDifference(timeDifference(new Date(), new Date(createdAt)));
+        }
+      }, 4000);
+    }
+    return () => {
+      isMounted.current = false;
+    };
+  }, [createdAt, timeDifference]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -66,7 +90,15 @@ const CommentItem = ({ comment }) => {
             />
             <p className="username">{user.username}</p>
             {isCurrentUser && <p className="currentUser">you</p>}
-            <p className="time">{createdAt}</p>
+            <p className="time">
+              {dateDifference
+                ? dateDifference
+                : new Date(createdAt).getTime() > 0
+                ? setDateDifference(
+                    timeDifference(new Date(), new Date(createdAt))
+                  )
+                : createdAt}
+            </p>
           </div>
           {editComment ? (
             <form className="commentForm updateForm" onSubmit={handleSubmit}>
