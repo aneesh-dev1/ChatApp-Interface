@@ -1,10 +1,11 @@
 import { createContext, useEffect, useState } from "react";
+import useLocalStorage from "../hooks/useLocalStorage";
 import data from "../data/data.json";
 
 const CommentContext = createContext();
 
 export const CommentContextProvider = ({ children }) => {
-  const [state, setState] = useState(data);
+  const [state, setState] = useLocalStorage("state", data);
 
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
