@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/ChatApp-Interface/static/css/main.72f40808.css",
+    "main.js": "/ChatApp-Interface/static/js/main.6e23dbe9.js",
+    "static/media/image-amyrobson.webp": "/ChatApp-Interface/static/media/image-amyrobson.974bbf3c9ffb709f30a0.webp",
+    "static/media/image-juliusomo.webp": "/ChatApp-Interface/static/media/image-juliusomo.595ca29b9049f4c6ce66.webp",
+    "static/media/image-maxblagun.webp": "/ChatApp-Interface/static/media/image-maxblagun.e423f15841d76f3a5361.webp",
+    "static/media/image-ramsesmiron.webp": "/ChatApp-Interface/static/media/image-ramsesmiron.62a67681169b8dcdc378.webp",
+    "index.html": "/ChatApp-Interface/index.html",
+    "static/media/icon-plus.svg": "/ChatApp-Interface/static/media/icon-plus.0037a825a550965779412c2890bd328b.svg",
+    "static/media/icon-edit.svg": "/ChatApp-Interface/static/media/icon-edit.b0c7f9ebaec367bd3ae2539df8b55ff9.svg",
+    "static/media/icon-reply.svg": "/ChatApp-Interface/static/media/icon-reply.bfb4589d45cd96abd45e3b82f7e7bbc6.svg",
+    "static/media/icon-minus.svg": "/ChatApp-Interface/static/media/icon-minus.4aa6933cb1575b3c54fa67d84a61efaf.svg",
+    "static/media/icon-delete.svg": "/ChatApp-Interface/static/media/icon-delete.86cedbf2e37529f9c8f1f744254059b0.svg",
+    "main.72f40808.css.map": "/ChatApp-Interface/static/css/main.72f40808.css.map",
+    "main.6e23dbe9.js.map": "/ChatApp-Interface/static/js/main.6e23dbe9.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.72f40808.css",
+    "static/js/main.6e23dbe9.js"
+  ]
+}
